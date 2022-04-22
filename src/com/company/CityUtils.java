@@ -39,6 +39,36 @@ public class CityUtils {
         });
     }
 
+    /**
+     * сортирует получаемыый массив по региону
+     *
+     * @param cities массив с данными о городах
+     */
+    private static void sortByRegion(List<City> cities) {
+
+        cities.sort((c1, c2) -> {
+            return c1.getRegion().compareToIgnoreCase(c2.getRegion());
+        });
+    }
+
+    public static HashMap<String, Integer> QuantityOfCity(List<City> cities) {
+        City[] array = new City[cities.size()];
+        cities.toArray(array);
+        HashMap<String, Integer> citiesMap = new HashMap<>();
+        sortByRegion(cities);
+        Integer count = 1;
+        for (int i = 1; i < array.length; i++) {
+            if (!array[i].getRegion().equals(array[i - 1].getRegion())) {
+                citiesMap.put(array[i - 1].getRegion(), count);
+                count = 0;
+            }
+            count++;
+        }
+        citiesMap.put(array[array.length-1].getRegion(), count);
+        citiesMap.forEach((key, value) -> System.out.println(key + " - " + value));
+        return citiesMap;
+    }
+
 
     /**
      * сортирует получаемыый массив по имени и дистрикту
@@ -56,35 +86,40 @@ public class CityUtils {
         });
     }
 
-    /**поиск максимального значения в коллекции лист
-     * @param cities массив городов
+    /**
+     * поиск максимального значения в коллекции лист
      *
+     * @param cities массив городов
+     *               <p>
      *               ниже реализован поиск в массиве
-       */
+     */
     //  private static City findMax(List<City> cities) {
-        //      return cities.stream().max(
-                //              (c1, c2) -> {
-            //                  return Integer.parseInt(c1.getPopulation()) - Integer.parseInt(c2.getPopulation());
-            //              }
-                //      ).get();
-        //  }
+    //      return cities.stream().max(
+    //              (c1, c2) -> {
+    //                  return Integer.parseInt(c1.getPopulation()) - Integer.parseInt(c2.getPopulation());
+    //              }
+    //      ).get();
+    //  }
     //
-            //  public static void printMaxPopulation(List<City> cities){
-        //      City city=findMax(cities);
-        //      System.out.println("name = " + city.getName()+", population = " + city.getPopulation());
-        //  }
-
-    private static int[] findMax(List<City> cities){
+    //  public static void printMaxPopulation(List<City> cities){
+    //      City city=findMax(cities);
+    //      System.out.println("name = " + city.getName()+", population = " + city.getPopulation());
+    //  }
+    private static int[] findMax(List<City> cities) {
         City[] array = new City[cities.size()];
         cities.toArray(array);
-        int max=0;
-        int index=0;
+        int max = 0;
+        int index = 0;
         for (int i = 0; i < array.length; i++) {
-            if (Integer.parseInt(array[i].getPopulation())> max) {max= Integer.parseInt(array[i].getPopulation()); index=i;}
+            if (Integer.parseInt(array[i].getPopulation()) > max) {
+                max = Integer.parseInt(array[i].getPopulation());
+                index = i;
+            }
         }
-        int[] inter= new int[]{25,23};
+        int[] inter = new int[]{25, 23};
         return new int[]{index, max};
     }
+
     /**
      * Поиск города с наибольшим количеством жителей путем сортировки вставками
      *

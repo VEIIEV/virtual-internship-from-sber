@@ -10,13 +10,14 @@ public class Main {
         // write your code here
 
        List<City> cities=parse();
-//     sortByName(cities);
-//     print(cities);
+ // sortByName(cities);
+ // print(cities);
 
 
-//     sortByDistrictandName(cities);
-//     print(cities);
+ // sortByDistrictandName(cities);
+ // print(cities);
         printMaxPopulation(cities);
+        QuantityOfCity(cities);
 
 
     }

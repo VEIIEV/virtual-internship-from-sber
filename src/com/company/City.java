@@ -31,6 +31,10 @@ public class City implements Comparable<City> {
         return name;
     }
 
+    public String getRegion() {
+        return region;
+    }
+
     public String getPopulation() {
         return population;
     }
