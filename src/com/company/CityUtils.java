@@ -51,7 +51,12 @@ public class CityUtils {
         });
     }
 
-    public static HashMap<String, Integer> QuantityOfCity(List<City> cities) {
+    /**
+     * отображает количство городов в каждом регионе
+     *
+     * @param cities массив с данными о городах
+     */
+    public static HashMap<String, Integer> findQuantityOfCity(List<City> cities) {
         City[] array = new City[cities.size()];
         cities.toArray(array);
         HashMap<String, Integer> citiesMap = new HashMap<>();
@@ -69,6 +74,16 @@ public class CityUtils {
         return citiesMap;
     }
 
+    /**
+     * Поиск количества городов в каждом из регионов (lambda-выражения)
+     *
+     * @param cities массив городов
+     */
+    private static void findCountCityByRegionV2(List<City> cities) {
+        Map<String, Integer> regions = new HashMap<>();
+        cities.forEach(city -> regions.merge(city.getRegion(), 1, Integer::sum));
+        regions.forEach((k, v) -> System.out.println(MessageFormat.format(" {0} = {1}", k, v)));
+    }
 
     /**
      * сортирует получаемыый массив по имени и дистрикту
