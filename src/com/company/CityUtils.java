@@ -2,6 +2,7 @@ package com.company;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.MessageFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -84,6 +85,26 @@ public class CityUtils {
         int[] inter= new int[]{25,23};
         return new int[]{index, max};
     }
+    /**
+     * Поиск города с наибольшим количеством жителей путем сортировки вставками
+     *
+     * @param cities массив городов
+     */
+    private static void findByInsertionSort(List<City> cities) {
+        City[] array = new City[cities.size()];
+        cities.toArray(array);
+        for (int i = 1; i < array.length; i++) {
+            City current = array[i];
+            int j = i - 1;
+            while (j >= 0 && Integer.parseInt(current.getPopulation()) < Integer.parseInt(array[j].getPopulation())) {
+                array[j + 1] = array[j];
+                j--;
+            }
+            array[j + 1] = current;
+        }
+        System.out.println(MessageFormat.format("[{0}] = {1}", array.length - 1, array[array.length - 1]));
+    }
+
     public static void printMaxPopulation(List<City> cities) {
         int[] result = findMax(cities);
         System.out.println("[" + result[0] + "] =" + result[1]);
