@@ -37,7 +37,7 @@ public class CityUtils {
     public static void sortByName(List<City> cities){
 
         cities.sort((c1, c2) -> {
-            return c1.getName().compareTo(c2.getName());
+            return c1.getName().compareToIgnoreCase(c2.getName());
         });
     }
 
@@ -50,10 +50,10 @@ public class CityUtils {
     public static void sortByDistrictandName(List<City> cities){
 
         cities.sort((p1, p2) -> {
-            if (p1.getDistrict().compareTo(p2.getDistrict()) == 0) {
-                return p1.getName().compareTo(p2.getName());
+            if (p1.getDistrict().compareToIgnoreCase(p2.getDistrict()) == 0) {
+                return p1.getName().compareToIgnoreCase(p2.getName());
             } else {
-                return p1.getDistrict().compareTo(p2.getDistrict());
+                return p1.getDistrict().compareToIgnoreCase(p2.getDistrict());
             }
         });
     }
