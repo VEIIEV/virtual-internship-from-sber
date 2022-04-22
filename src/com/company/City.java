@@ -3,7 +3,7 @@ package com.company;
 
 import java.util.Comparator;
 
-public class City<T> implements Comparable<City> {
+public class City implements Comparable<City> {
 
     private String name; // – наименование города
     private String region; // - регион
@@ -31,7 +31,9 @@ public class City<T> implements Comparable<City> {
         return name;
     }
 
-
+    public String getPopulation() {
+        return population;
+    }
 
     public City(String name, String region, String district, String population, String foundation) {
         this.name = name;

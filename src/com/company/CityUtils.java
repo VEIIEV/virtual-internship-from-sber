@@ -2,10 +2,7 @@ package com.company;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CityUtils {
@@ -34,7 +31,7 @@ public class CityUtils {
      * @param cities массив с данными о городах
      */
 
-    public static void sortByName(List<City> cities){
+    public static void sortByName(List<City> cities) {
 
         cities.sort((c1, c2) -> {
             return c1.getName().compareToIgnoreCase(c2.getName());
@@ -47,7 +44,7 @@ public class CityUtils {
      *
      * @param cities массив с данными о городах
      */
-    public static void sortByDistrictandName(List<City> cities){
+    public static void sortByDistrictandName(List<City> cities) {
 
         cities.sort((p1, p2) -> {
             if (p1.getDistrict().compareToIgnoreCase(p2.getDistrict()) == 0) {
@@ -57,6 +54,41 @@ public class CityUtils {
             }
         });
     }
+
+    /**поиск максимального значения в коллекции лист
+     * @param cities массив городов
+     *
+     *               ниже реализован поиск в массиве
+       */
+    //  private static City findMax(List<City> cities) {
+        //      return cities.stream().max(
+                //              (c1, c2) -> {
+            //                  return Integer.parseInt(c1.getPopulation()) - Integer.parseInt(c2.getPopulation());
+            //              }
+                //      ).get();
+        //  }
+    //
+            //  public static void printMaxPopulation(List<City> cities){
+        //      City city=findMax(cities);
+        //      System.out.println("name = " + city.getName()+", population = " + city.getPopulation());
+        //  }
+
+    private static int[] findMax(List<City> cities){
+        City[] array = new City[cities.size()];
+        cities.toArray(array);
+        int max=0;
+        int index=0;
+        for (int i = 0; i < array.length; i++) {
+            if (Integer.parseInt(array[i].getPopulation())> max) {max= Integer.parseInt(array[i].getPopulation()); index=i;}
+        }
+        int[] inter= new int[]{25,23};
+        return new int[]{index, max};
+    }
+    public static void printMaxPopulation(List<City> cities) {
+        int[] result = findMax(cities);
+        System.out.println("[" + result[0] + "] =" + result[1]);
+    }
+
 
     private static City parse(String line) {
         Scanner scanner = new Scanner(line);
